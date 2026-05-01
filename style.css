@@ -1,0 +1,30 @@
+/* Bütün sitenin fontunu Poppins yaptık ve arka planı temiz bir açık gri yaptık */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Üst menüye Mavi rengini verdik. (Kodu: #4f46e5) */
+.ozel-menu {
+    background-color: #4f46e5;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Menünün altına çok hafif, şık bir gölge ekledik */
+}
+
+/* Başlıkların rengini  lacivert yaptık */
+h1, h2, h3, h4 {
+    color: #1e293b;
+    font-weight: 600; /* Başlıklar biraz daha dolgun dursun diye */
+}
+
+/* Liste elemanlarının arasına boşluk koyduk ki sıkışık durmasın */
+ul li {
+    margin-bottom: 12px;
+    font-size: 17px;
+    color: #475569; /* Metin rengi yumuşak gri/mavi */
+}
+
+/* Resimlerin köşelerini daha tatlı yuvarlattık ve gölge verdik */
+img {
+    border-radius: 12px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
