@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İlgi Alanlarım | Mustafa Emir Kayapınar</title>
+    <!-- Bootstrap ve Fontlar -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Üst Menü -->
+    <nav class="navbar navbar-expand-lg navbar-dark ozel-menu shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">Proje: b251210090</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkında</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ozgecmis.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sehrim.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="ilgialanlarim.html">İlgi Alanlarım</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">İletişim</a></li> 
+                    <li class="nav-item"><a class="nav-link" href="#">Giriş (Login)</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ana İçerik -->
+    <main class="container mt-5">
+        
+        <!--  Bu ekrandaki diziler Fetch API ile TVMaze sunucularından anlık olarak çekilmektedir. -->
+        <header class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-dark">İzlediğim Diziler ve Favorilerim</h1>
+        </header>
+
+        <!-- Dizi Kartlarının Geleceği Alan -->
+        <div class="row justify-content-center" id="diziKutusu">
+            <div class="text-center mt-5" id="yukleniyorMetni">
+                <div class="spinner-border text-danger" role="status">
+                    <span class="visually-hidden">Yükleniyor...</span>
+                </div>
+                <p class="mt-2 fw-bold">Diziler yükleniyor...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // İngilizce türleri Türkçeye çeviren sözlük
+        const turCeviri = {
+            "Action": "Aksiyon",
+            "Drama": "Dram",
+            "Science-Fiction": "Bilim Kurgu",
+            "Sci-Fi": "Bilim Kurgu",
+            "Crime": "Suç",
+            "Thriller": "Gerilim",
+            "Adventure": "Macera",
+            "Horror": "Korku",
+            "Comedy": "Komedi",
+            "Fantasy": "Fantastik",
+            "Mystery": "Gizem"
+        };
+
+        // Kendi yorumlarım ve favori karakterlerim
+        const diziler = [
+            { 
+                sorgu: "the boys", 
+                yorum: "Süper kahramanların karanlık ve gerçekçi yüzünü gösteren çarpıcı bir yapım. Dizideki en büyük favorim kesinlikle <strong>Billy Butcher</strong>; onun o umursamaz ama kararlı tavrı diziyi tek başına sürüklüyor." 
+            },
+            { 
+                sorgu: "dexter", 
+                yorum: "Gündüzleri polisiyede kan analisti, geceleri ise adalet dağıtan 'Dark Passenger'... Zekice kurgusuyla başucu dizilerimden. Favori karakterim ise tuhaf espri anlayışıyla ekrana her çıktığında güldüren <strong>Vince Masuka</strong>." 
+            },
+            { 
+                sorgu: "stranger things", 
+                yorum: "80'ler nostaljisi, bilim kurgu ve arkadaşlık teması ancak bu kadar harika işlenebilirdi. İlk sezondan beri en büyük favorim <strong>Steve Harrington</strong>; dizideki karakter gelişimi gerçekten inanılmazdı." 
+            },
+            { 
+                sorgu: "game of thrones", 
+                yorum: "Televizyon tarihinin en destansı ve büyük bütçeli yapımlarından biri. Entrikalar ve savaş sahneleri muazzam. Benim bu devasa evrendeki favorim ise duruşu ve onuruyla <strong>Jon Snow</strong>." 
+            },
+            { 
+                sorgu: "la casa de papel", 
+                yorum: "İspanyol darphanesi soygunu ve zekice işlenmiş planlarıyla insanı ekrana kilitliyor. Dizinin o asi ruhu çok etkileyici. Benim favori karakterim ise cesareti ve tükenmez enerjisiyle <strong>Tokyo</strong>." 
+            }
+        ];
+
+        const kutu = document.getElementById("diziKutusu");
+
+        // API'den verileri çeken fonksiyon
+        async function dizileriGetir() {
+            document.getElementById("yukleniyorMetni").style.display = "none";
+
+            for (let dizi of diziler) {
+                try {
+                    const tepki = await fetch(`https://api.tvmaze.com/singlesearch/shows?q=${dizi.sorgu}`);
+                    const veri = await tepki.json();
+
+                    // Gelen İngilizce türleri Türkçeye çeviriyoruz
+                    const turlerTurkce = veri.genres.map(tur => turCeviri[tur] || tur).join(", ");
+
+                    // Kart Tasarımı
+                    const kartHTML = `
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow-sm pt-4 px-3 text-center" style="background-color: #f4f6f9; border: 1px solid #e0e0e0; border-radius: 12px;">
+                                <img src="${veri.image.medium}" class="mx-auto rounded shadow" style="width: 140px; height: 200px; object-fit: cover;" alt="${veri.name}">
+                                
+                                <div class="card-body d-flex flex-column text-start">
+                                    <h5 class="card-title fw-bold text-dark mt-2 text-center">${veri.name}</h5>
+                                    <p class="text-danger fw-bold mb-2 text-center">Puan: ${veri.rating.average} / 10</p>
+                                    <p class="card-text text-muted mb-3 text-center" style="font-size: 0.9em;">
+                                        <strong>Tür:</strong> ${turlerTurkce}
+                                    </p>
+                                    
+                                    <!-- Kendi Yorumumuz ve Favori Karakter -->
+                                    <div class="bg-white p-3 rounded mb-4 border-start border-primary border-3 flex-grow-1 shadow-sm">
+                                        <p class="mb-0 text-dark" style="font-size: 0.85em; line-height: 1.6;">
+                                            <strong>Benim Yorumum:</strong> <br> ${dizi.yorum}
+                                        </p>
+                                    </div>
+
+                                    <!-- Dış Bağlantı Butonu -->
+                                    <a href="${veri.url}" target="_blank" class="btn btn-outline-dark btn-sm mt-auto fw-bold">TVMaze Ayrıntıları</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    kutu.innerHTML += kartHTML;
+                } catch (hata) {
+                    console.error("Veri çekilirken hata oluştu:", hata);
+                }
+            }
+        }
+
+        dizileriGetir();
+    </script>
+</body>
+</html>
