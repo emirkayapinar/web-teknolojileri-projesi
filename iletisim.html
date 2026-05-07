@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim | Mustafa Emir Kayapınar</title>
+    <!-- Tasarım için Bootstrap çekiyoruz, CSS dosyamı da bağladım -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Menü kısmı, aktif link İletişim sayfasında -->
+    <nav class="navbar navbar-expand-lg navbar-dark ozel-menu shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">Proje: b251210090</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkında</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ozgecmis.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sehrim.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ilgialanlarim.html">İlgi Alanlarım</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="iletisim.html">İletişim</a></li> 
+                    <li class="nav-item"><a class="nav-link" href="#">Giriş (Login)</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-5">
+        
+        <header class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-dark">Benimle İletişime Geçin</h1>
+            <p class="lead text-muted">Proje, staj veya herhangi bir soru için aşağıdaki formu doldurabilirsiniz.</p>
+        </header>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8">
+               <!-- Formun etrafındaki gölgeli beyaz kutu -->
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body p-5">
+                        
+                        <!--  FORM YAPISI SADECE TASARIM (6. GÜN) -->
+                        <!--  Şimdilik action boş (#), ileride PHP'ye bağlayacağız -->
+                        <form action="#" method="POST" id="iletisimFormu">
+                            
+                           <!--  Ad Soyad Kutusu  -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Adınız ve Soyadınız</label>
+                                <input type="text" class="form-control bg-light" id="isim" name="isim" placeholder="Örn: Mustafa Emir">
+                            </div>
+
+                            <!-- Mail Kutusu (Type email yaptık ki telefonda klavyede @ çıksın) -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">E-Posta Adresiniz</label>
+                                <input type="email" class="form-control bg-light" id="email" name="email" placeholder="ornek@mail.com">
+                            </div>
+
+                            <!-- Telefon numarası kutusu  -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Telefon Numaranız</label>
+                                <input type="tel" class="form-control bg-light" id="telefon" name="telefon" placeholder="0555 123 45 67">
+                            </div>
+
+                            <!--Radio Buttonlar  -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold d-block">Durumunuz</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="durum" id="ogrenci" value="Öğrenci">
+                                    <label class="form-check-label" for="ogrenci">Öğrenciyim</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="durum" id="mezun" value="Mezun">
+                                    <label class="form-check-label" for="mezun">Mezunum</label>
+                                </div>
+                            </div>
+
+                            <!-- Açılır Menü (Select) -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Mesajınızın Konusu</label>
+                                <select class="form-select bg-light" id="konu" name="konu">
+                                     <!-- Kullanıcı bunu seçemesin diye disabled yapıldı -->
+                                    <option value="" disabled selected>Lütfen bir konu seçin...</option>
+                                    <option value="Proje">Proje Değerlendirmesi</option>
+                                    <option value="Staj">İş / Staj Teklifi</option>
+                                    <option value="Soru">Soru / Öneri</option>
+                                </select>
+                            </div>
+
+                            <!-- Kullanıcının mesajı yazacağı alan -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Mesajınız</label>
+                                <textarea class="form-control bg-light" id="mesaj" name="mesaj" rows="4" placeholder="Mesajınızı buraya yazınız..."></textarea>
+                            </div>
+
+                            <!-- Onay kutusu (Checkbox) -->
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="onay" name="onay">
+                                <label class="form-check-label" for="onay">
+                                    Bilgilerimin doğruluğunu onaylıyorum.
+                                </label>
+                            </div>
+
+                           <!-- Butonlar (Henüz işlevleri yok, sadece tasarım)-->
+                            <div class="d-grid gap-3 d-md-flex justify-content-md-center mt-4 pt-3 border-top">
+                                <button type="reset" class="btn btn-outline-secondary btn-lg px-4 fw-bold">Temizle</button>
+                                <button type="submit" class="btn btn-primary btn-lg px-5 fw-bold shadow-sm">Gönder</button>
+                            </div>
+
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Sayfa yüklendiğinde takılmasın diye Bootstrap JS dosyası en altta -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
