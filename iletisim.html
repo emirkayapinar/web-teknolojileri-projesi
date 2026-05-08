@@ -8,10 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- 7. GÜN: Vue.js Kütüphanesini Çekiyoruz -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body class="bg-light">
 
-    <!-- Menü kısmı, aktif link İletişim sayfasında -->
+    <!--Menü kısmı, aktif link İletişim sayfasında -->
     <nav class="navbar navbar-expand-lg navbar-dark ozel-menu shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="#">Proje: b251210090</a>
@@ -23,13 +26,14 @@
                     <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
                     <li class="nav-item"><a class="nav-link" href="ilgialanlarim.html">İlgi Alanlarım</a></li>
                     <li class="nav-item"><a class="nav-link active" href="iletisim.html">İletişim</a></li> 
-                    <li class="nav-item"><a class="nav-link" href="#">Giriş (Login)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Giriş (Login)</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <main class="container mt-5">
+    <!--7. GÜN: Vue.js'in bu alanı tanıması için id eklendi -->
+    <main class="container mt-5" id="vueUygulamasi">
         
         <header class="text-center mb-5">
             <h1 class="display-4 fw-bold text-dark">Benimle İletişime Geçin</h1>
@@ -42,37 +46,40 @@
                 <div class="card shadow border-0 rounded-4">
                     <div class="card-body p-5">
                         
-                        <!--  FORM YAPISI SADECE TASARIM (6. GÜN) -->
-                        <!--  Şimdilik action boş (#), ileride PHP'ye bağlayacağız -->
-                        <form action="#" method="POST" id="iletisimFormu">
+                        <!-- FORM YAPISI SADECE TASARIM (6. GÜN) -->
+                        <!-- Şimdilik action boş (#), ileride PHP'ye bağlayacağız -->
+                        <form action="#" method="POST" id="iletisimFormu" ref="iletisimFormu">
                             
-                           <!--  Ad Soyad Kutusu  -->
+                           <!-- Ad Soyad Kutusu -->
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Adınız ve Soyadınız</label>
-                                <input type="text" class="form-control bg-light" id="isim" name="isim" placeholder="Örn: Mustafa Emir">
+                                <!-- 7. GÜN: v-model eklendi -->
+                                <input type="text" class="form-control bg-light" id="isim" name="isim" v-model="form.isim" placeholder="Örn: Mustafa Emir">
                             </div>
 
-                            <!-- Mail Kutusu (Type email yaptık ki telefonda klavyede @ çıksın) -->
+                            <!-- Mail Kutusu  -->
                             <div class="mb-3">
                                 <label class="form-label fw-bold">E-Posta Adresiniz</label>
-                                <input type="email" class="form-control bg-light" id="email" name="email" placeholder="ornek@mail.com">
+                                <!-- 7. GÜN: v-model eklendi ve JS ile kontrol edeceğimiz için type text yapıldı--> 
+                                <input type="text" class="form-control bg-light" id="email" name="email" v-model="form.email" placeholder="ornek@mail.com">
                             </div>
 
-                            <!-- Telefon numarası kutusu  -->
+                            <!-- Telefon numarası kutusu-->
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Telefon Numaranız</label>
-                                <input type="tel" class="form-control bg-light" id="telefon" name="telefon" placeholder="0555 123 45 67">
+                                <!-- 7. GÜN: v-model eklendi -->
+                                <input type="text" class="form-control bg-light" id="telefon" name="telefon" v-model="form.telefon" placeholder="0555 123 45 67">
                             </div>
 
                             <!--Radio Buttonlar  -->
                             <div class="mb-3">
                                 <label class="form-label fw-bold d-block">Durumunuz</label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="durum" id="ogrenci" value="Öğrenci">
+                                    <input class="form-check-input" type="radio" name="durum" id="ogrenci" value="Öğrenci" v-model="form.durum">
                                     <label class="form-check-label" for="ogrenci">Öğrenciyim</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="durum" id="mezun" value="Mezun">
+                                    <input class="form-check-input" type="radio" name="durum" id="mezun" value="Mezun" v-model="form.durum">
                                     <label class="form-check-label" for="mezun">Mezunum</label>
                                 </div>
                             </div>
@@ -80,8 +87,8 @@
                             <!-- Açılır Menü (Select) -->
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Mesajınızın Konusu</label>
-                                <select class="form-select bg-light" id="konu" name="konu">
-                                     <!-- Kullanıcı bunu seçemesin diye disabled yapıldı -->
+                                <select class="form-select bg-light" id="konu" name="konu" v-model="form.konu">
+                                    <!-- Kullanıcı bunu seçemesin diye disabled yapıldı -->
                                     <option value="" disabled selected>Lütfen bir konu seçin...</option>
                                     <option value="Proje">Proje Değerlendirmesi</option>
                                     <option value="Staj">İş / Staj Teklifi</option>
@@ -92,21 +99,22 @@
                             <!-- Kullanıcının mesajı yazacağı alan -->
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Mesajınız</label>
-                                <textarea class="form-control bg-light" id="mesaj" name="mesaj" rows="4" placeholder="Mesajınızı buraya yazınız..."></textarea>
+                                <textarea class="form-control bg-light" id="mesaj" name="mesaj" rows="4" v-model="form.mesaj" placeholder="Mesajınızı buraya yazınız..."></textarea>
                             </div>
 
-                            <!-- Onay kutusu (Checkbox) -->
+                              <!-- Onay kutusu (Checkbox) -->
                             <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" id="onay" name="onay">
+                                <input class="form-check-input" type="checkbox" id="onay" name="onay" v-model="form.onay">
                                 <label class="form-check-label" for="onay">
                                     Bilgilerimin doğruluğunu onaylıyorum.
                                 </label>
                             </div>
 
-                           <!-- Butonlar (Henüz işlevleri yok, sadece tasarım)-->
+                           <!-- 7. GÜN:  2 farklı denetim butonu eklendi -->
                             <div class="d-grid gap-3 d-md-flex justify-content-md-center mt-4 pt-3 border-top">
                                 <button type="reset" class="btn btn-outline-secondary btn-lg px-4 fw-bold">Temizle</button>
-                                <button type="submit" class="btn btn-primary btn-lg px-5 fw-bold shadow-sm">Gönder</button>
+                                <button type="button" class="btn btn-danger btn-lg px-4 fw-bold shadow-sm" onclick="nativeKontrol()">Native JS Gönder</button>
+                                <button type="button" class="btn btn-success btn-lg px-4 fw-bold shadow-sm" @click="vueKontrol()">Vue.js Gönder</button>
                             </div>
 
                         </form>
@@ -120,5 +128,87 @@
 
     <!-- Sayfa yüklendiğinde takılmasın diye Bootstrap JS dosyası en altta -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- 7. GÜN: JAVASCRIPT HATA DENETİM KODLARI -->
+    <script>
+        // <!-- YÖNTEM 1: NATIVE (SAF) JAVASCRIPT  -->
+        function nativeKontrol() {
+            let isim = document.getElementById("isim").value;
+            let email = document.getElementById("email").value;
+            let telefon = document.getElementById("telefon").value;
+            let mesaj = document.getElementById("mesaj").value;
+            let onay = document.getElementById("onay").checked;
+
+            if (isim === "" || email === "" || telefon === "" || mesaj === "") {
+                alert("(Native JS) HATA: Lütfen tüm boş alanları doldurunuz!");
+                return;
+            }
+
+            let rakamSarti = /^[0-9]+$/;
+            if (!telefon.match(rakamSarti)) {
+                alert("(Native JS) HATA: Telefon numarası sadece rakamlardan oluşmalıdır!");
+                return;
+            }
+
+            let emailSarti = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.match(emailSarti)) {
+                alert("(Native JS) HATA: Lütfen geçerli bir e-posta adresi giriniz!");
+                return;
+            }
+
+            if (!onay) {
+                alert("(Native JS) HATA: Bilgilerin doğruluğunu onaylamanız gerekiyor!");
+                return;
+            }
+
+            alert("(Native JS) BAŞARILI! Form PHP sayfasına yollanıyor...");
+        }
+
+        // -- YÖNTEM 2: VUE.JS FRAMEWORK --
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    form: {
+                        isim: '',
+                        email: '',
+                        telefon: '',
+                        durum: '',
+                        konu: '',
+                        mesaj: '',
+                        onay: false
+                    }
+                }
+            },
+            methods: {
+                vueKontrol() {
+                    if (this.form.isim === '' || this.form.email === '' || this.form.telefon === '' || this.form.mesaj === '') {
+                        alert("(Vue.js) HATA: Lütfen tüm boş alanları doldurunuz!");
+                        return;
+                    }
+
+                    let rakamSarti = /^[0-9]+$/;
+                    if (!rakamSarti.test(this.form.telefon)) {
+                        alert("(Vue.js) HATA: Telefon alanına sadece rakam girmelisiniz!");
+                        return;
+                    }
+
+                    let emailSarti = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailSarti.test(this.form.email)) {
+                        alert("(Vue.js) HATA: E-posta formatınız hatalı!");
+                        return;
+                    }
+
+                    if (!this.form.onay) {
+                        alert("(Vue.js) HATA: Onay kutusunu işaretlemediniz!");
+                        return;
+                    }
+
+                    alert("(Vue.js) BAŞARILI! Vue ile doğrulandı, form PHP'ye yollanıyor...");
+                }
+            }
+        }).mount('#vueUygulamasi');
+    </script>
 </body>
 </html>
