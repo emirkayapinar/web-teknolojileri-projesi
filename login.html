@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş (Login) | Mustafa Emir Kayapınar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark ozel-menu shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">Proje: b251210090</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkında</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ozgecmis.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sehrim.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ilgialanlarim.html">İlgi Alanlarım</a></li>
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li> 
+                    <li class="nav-item"><a class="nav-link active" href="login.html">Giriş (Login)</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-5">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-5">
+                <div class="card shadow border-0 rounded-4 mt-5">
+                    
+                    <div class="card-header text-center text-white p-4" style="background-color: #1a1a1a; border-bottom: 4px solid #cc0000; border-radius: 1rem 1rem 0 0;">
+                        <h3 class="mb-0 fw-bold">Sisteme Giriş</h3>
+                    </div>
+
+                    <div class="card-body p-5">
+                        
+                        <form action="login.php" method="POST" id="loginFormu" onsubmit="return loginKontrol()">
+                            
+                            <div class="mb-4">
+                                <label for="kullaniciAdi" class="form-label fw-bold">Kullanıcı Adı (Okul Maili)</label>
+                                <input type="text" class="form-control form-control-lg bg-light" id="kullaniciAdi" name="kullaniciAdi" placeholder="Örn: b251210090@sakarya.edu.tr">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="sifre" class="form-label fw-bold">Şifre (Öğrenci No)</label>
+                                <input type="password" class="form-control form-control-lg bg-light" id="sifre" name="sifre" placeholder="Öğrenci Numaranız">
+                            </div>
+
+                            <div class="d-grid mt-5">
+                                <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm" style="background-color: #1a1a1a; border-color: #1a1a1a;">Giriş Yap</button>
+                            </div>
+
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function loginKontrol() {
+            let email = document.getElementById("kullaniciAdi").value;
+            let sifre = document.getElementById("sifre").value;
+
+            // 1. Boş alan kontrolü
+            if (email === "" || sifre === "") {
+                alert("HATA: Kullanıcı adı veya şifre boş bırakılamaz!");
+                return false; 
+            }
+
+            // 2. E-posta format kontrolü (Nokta ve @ doğru yerde mi?)
+            // indexOf: @ işaretinin sırasını bulur
+            // lastIndexOf: En sondaki noktanın sırasını bulur
+            let atIsareti = email.indexOf("@");
+            let noktaIsareti = email.lastIndexOf(".");
+
+            // KURAL 1: @ işareti en başta olamaz veya hiç yoksa hata ver (Örn: @sakarya.com)
+            // KURAL 2: @ işareti ile nokta arasında en az 1 harf olmalı (Örn: emir@.com)
+            // KURAL 3: Noktadan sonra en az 2 harf (tr, com) olmalı (Örn: emir@sakarya.c)
+            if (atIsareti < 1 || noktaIsareti < atIsareti + 2 || noktaIsareti + 2 >= email.length) {
+                alert("HATA: Lütfen e-postanızı doğru formatta giriniz! (Örn: b251210090@sakarya.edu.tr)");
+                return false; 
+            }
+
+            // Eğer her şey doğruysa form login.php'ye gönderilir
+            return true; 
+        }
+    </script>
+
+</body>
+</html>
