@@ -48,11 +48,11 @@
                         
                         <!-- FORM YAPISI SADECE TASARIM (6. GÜN) -->
                         <!-- Şimdilik action boş (#), ileride PHP'ye bağlayacağız -->
-                        <form action="#" method="POST" id="iletisimFormu" ref="iletisimFormu">
+                        <form action="islem.php" method="POST" id="iletisimFormu" ref="iletisimFormu">
                             
                            <!-- Ad Soyad Kutusu -->
                             <div class="mb-3">
-                                <label class="form-label fw-bold">Adınız ve Soyadınız</label>
+                                <label class="nativeKontrol()-label fw-bold">Adınız ve Soyadınız</label>
                                 <!-- 7. GÜN: v-model eklendi -->
                                 <input type="text" class="form-control bg-light" id="isim" name="isim" v-model="form.isim" placeholder="Örn: Mustafa Emir">
                             </div>
@@ -162,9 +162,10 @@
             }
 
             alert("(Native JS) BAŞARILI! Form PHP sayfasına yollanıyor...");
+            document.getElementById("iletisimFormu").submit();
         }
-
-        // -- YÖNTEM 2: VUE.JS FRAMEWORK --
+     
+            // -- YÖNTEM 2: VUE.JS FRAMEWORK --
         const { createApp } = Vue;
 
         createApp({
@@ -206,6 +207,7 @@
                     }
 
                     alert("(Vue.js) BAŞARILI! Vue ile doğrulandı, form PHP'ye yollanıyor...");
+                    document.getElementById("iletisimFormu").submit();
                 }
             }
         }).mount('#vueUygulamasi');
