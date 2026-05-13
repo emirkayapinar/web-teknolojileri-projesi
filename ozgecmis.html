@@ -12,24 +12,28 @@
 <body>
 
     <!-- Üst Menü -->
-    <nav class="navbar navbar-expand-lg navbar-dark ozel-menu"> 
-        <!--navbar-expand-lg ile menülerin bilgisayarda yan yana telefonda ise dikey gözükmesini sağladık -->
+    <nav class="navbar navbar-expand-lg navbar-dark ozel-menu shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="#">Proje: b251210090</a>
-            <div class="collapse navbar-collapse">
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobilMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mobilMenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Hakkında</a></li>
                     <li class="nav-item"><a class="nav-link active" href="ozgecmis.html">Özgeçmiş</a></li>
                     <li class="nav-item"><a class="nav-link" href="sehrim.html">Şehrim</a></li>
                     <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
                     <li class="nav-item"><a class="nav-link" href="ilgialanlarim.html">İlgi Alanlarım</a></li>
-                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li> 
+                    <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
                     <li class="nav-item"><a class="nav-link" href="login.html">Giriş (Login)</a></li>
                 </ul>
             </div>
+            
         </div>
     </nav>
-
     <!-- Ana İçerik (Semantic Etiketler) -->
     <main class="container mt-5">
         
@@ -80,6 +84,11 @@
             </div>
         </div>
     </main>
-
+    <footer class="text-center py-4 mt-5 border-top bg-light">
+        <p class="text-muted mb-0 fw-bold">
+            &copy; 2026 | Web Teknolojileri Projesi | Mustafa Emir Kayapınar - b251210090
+        </p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

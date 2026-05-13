@@ -12,10 +12,15 @@
 <body>
 
     <!-- Üst Menü -->
-    <nav class="navbar navbar-expand-lg navbar-dark ozel-menu">
+    <nav class="navbar navbar-expand-lg navbar-dark ozel-menu shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="#">Proje: b251210090</a>
-            <div class="collapse navbar-collapse">
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobilMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mobilMenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Hakkında</a></li>
                     <li class="nav-item"><a class="nav-link" href="ozgecmis.html">Özgeçmiş</a></li>
@@ -26,9 +31,9 @@
                     <li class="nav-item"><a class="nav-link" href="login.html">Giriş (Login)</a></li>
                 </ul>
             </div>
+            
         </div>
     </nav>
-
     <!-- Ana İçerik -->
     <main class="container mt-5">
         <header class="text-center mb-5">
@@ -53,7 +58,7 @@
                         <div class="carousel-item active">
                             <!-- sivas1.jpg: Çifte Minareli Medrese -->
                             <img src="img/sivas1.jpg" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="Çifte Minareli Medrese">
-                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-2">
+                            <div class="carousel-caption  bg-dark bg-opacity-75 rounded p-2">
                                 <h5>Çifte Minareli Medrese</h5>
                                 <p>Sivas'ın simgesi olan görkemli tarihi eser.</p>
                             </div>
@@ -61,7 +66,7 @@
                         <div class="carousel-item">
                             <!-- sivas2.jpg: Gökpınar Gölü -->
                             <img src="img/sivas2.jpg" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="Gürün Gökpınar Gölü">
-                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-2">
+                            <div class="carousel-caption  bg-dark bg-opacity-75 rounded p-2">
                                 <h5>Gürün Gökpınar Gölü</h5>
                                 <p>Sivas'ın bozkırındaki turkuaz renkli saklı cennet.</p>
                             </div>
@@ -69,7 +74,7 @@
                         <div class="carousel-item">
                             <!-- sivas3.jpg: Divriği Ulu Camii -->
                             <img src="img/sivas3.jpg" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="Divriği Ulu Camii">
-                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-2">
+                            <div class="carousel-caption  bg-dark bg-opacity-75 rounded p-2">
                                 <h5>Divriği Ulu Camii ve Darüşşifası</h5>
                                 <p>UNESCO Dünya Mirası listesindeki mimari deha.</p>
                             </div>
@@ -77,7 +82,7 @@
                         <div class="carousel-item">
                             <!-- sivas4.jpg: Sivas Köftesi -->
                             <img src="img/sivas4.jpg" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="Sivas Köftesi">
-                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-2">
+                            <div class="carousel-caption  bg-dark bg-opacity-75 rounded p-2">
                                 <h5>Meşhur Sivas Köftesi</h5>
                                 <p>Sadece et, tuz ve ustalıkla yapılan efsane lezzet.</p>
                             </div>
@@ -151,7 +156,11 @@
             </div>
         </div>
     </main>
-
+    <footer class="text-center py-4 mt-5 border-top bg-light">
+        <p class="text-muted mb-0 fw-bold">
+            &copy; 2026 | Web Teknolojileri Projesi | Mustafa Emir Kayapınar - b251210090
+        </p>
+    </footer>
     <!-- Bootstrap JS (Slider İçin) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
