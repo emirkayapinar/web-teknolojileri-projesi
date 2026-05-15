@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İlgi Alanlarım | Mustafa Emir Kayapınar</title>
-    <!-- Bootstrap ve Fontlar -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body class="bg-light">
 
-    <!-- Üst Menü -->
     <nav class="navbar navbar-expand-lg navbar-dark ozel-menu shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="#">Proje: b251210090</a>
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobilMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div class="collapse navbar-collapse" id="mobilMenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Hakkında</a></li>
@@ -32,30 +33,25 @@
         </div>
     </nav>
 
-    <!-- Ana İçerik -->
-    <main class="container mt-5">
-        
-        <!--  Bu ekrandaki diziler Fetch API ile TVMaze sunucularından anlık olarak çekilmektedir. -->
+    <main class="container mt-5"> 
         <header class="text-center mb-5">
             <h1 class="display-4 fw-bold text-dark">İzlediğim Diziler ve Favorilerim</h1>
         </header>
 
-        <!-- Dizi Kartlarının Geleceği Alan -->
         <div class="row justify-content-center" id="diziKutusu">
+            
             <div class="text-center mt-5" id="yukleniyorMetni">
                 <div class="spinner-border text-danger" role="status">
                     <span class="visually-hidden">Yükleniyor...</span>
                 </div>
                 <p class="mt-2 fw-bold">Diziler yükleniyor...</p>
             </div>
+            
         </div>
     </main>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // İngilizce türleri Türkçeye çeviren sözlük
+        // API'den İngilizce gelen dizi türlerini (genres) Türkçeye çevirmek için hazırladığımız JSON sözlüğü
         const turCeviri = {
             "Action": "Aksiyon",
             "Drama": "Dram",
@@ -70,7 +66,7 @@
             "Mystery": "Gizem"
         };
 
-        // Kendi yorumlarım ve favori karakterlerim
+        // Kendi yorumlarım ve TVMaze'de aratılacak dizilerin sorgu anahtarları
         const diziler = [
             { 
                 sorgu: "the boys", 
@@ -94,60 +90,74 @@
             }
         ];
 
+        // Kartların ekleneceği HTML div elementini Document Object Model (DOM) üzerinden seçiyoruz
         const kutu = document.getElementById("diziKutusu");
 
-        // API'den verileri çeken fonksiyon
+        // Asenkron Veri Çekme Fonksiyonu (Async/Await yapısı)
         async function dizileriGetir() {
+            // Fonksiyon başladığında yükleniyor (spinner) animasyonunu ekrandan kaldırıyoruz
             document.getElementById("yukleniyorMetni").style.display = "none";
 
+            // Listemizdeki her bir dizi için döngü oluşturup API'ye tek tek istek atıyoruz
             for (let dizi of diziler) {
                 try {
+                    // Fetch API: TVMaze sunucusuna HTTP GET isteği atarak diziyi aratıyoruz
                     const tepki = await fetch(`https://api.tvmaze.com/singlesearch/shows?q=${dizi.sorgu}`);
+                    
+                    // Gelen HTTP cevabını JSON formatına dönüştürüyoruz (Parse işlemi)
                     const veri = await tepki.json();
 
-                    // Gelen İngilizce türleri Türkçeye çeviriyoruz
+                    // Array.map() kullanarak İngilizce türleri yukarıdaki sözlükten Türkçeye çeviriyoruz
                     const turlerTurkce = veri.genres.map(tur => turCeviri[tur] || tur).join(", ");
 
-                    // Kart Tasarımı
+                    // Template Literal (Geri Tırnak) kullanarak HTML yapısını dinamik olarak inşa ediyoruz
                     const kartHTML = `
-                        <div class="col-md-4 mb-4">
-                            <div class="card h-100 shadow-sm pt-4 px-3 text-center" style="background-color: #f4f6f9; border: 1px solid #e0e0e0; border-radius: 12px;">
-                                <img src="${veri.image.medium}" class="mx-auto rounded shadow" style="width: 140px; height: 200px; object-fit: cover;" alt="${veri.name}">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm pt-4 px-3 text-center" style="background-color: #f4f6f9; border: 1px solid #e0e0e0; border-radius: 12px;">
+                            
+                            <img src="${veri.image.medium}" class="mx-auto rounded shadow" style="width: 140px; height: 200px; object-fit: cover;" alt="${veri.name}"> 
+                            
+                            <div class="card-body d-flex flex-column text-start">
+                                <h5 class="card-title fw-bold text-dark mt-2 text-center">${veri.name}</h5>
+                                <p class="text-danger fw-bold mb-2 text-center">Puan: ${veri.rating.average} / 10</p>
                                 
-                                <div class="card-body d-flex flex-column text-start">
-                                    <h5 class="card-title fw-bold text-dark mt-2 text-center">${veri.name}</h5>
-                                    <p class="text-danger fw-bold mb-2 text-center">Puan: ${veri.rating.average} / 10</p>
-                                    <p class="card-text text-muted mb-3 text-center" style="font-size: 0.9em;">
-                                        <strong>Tür:</strong> ${turlerTurkce}
+                                <p class="card-text text-muted mb-3 text-center" style="font-size: 0.9em;">
+                                    <strong>Tür:</strong> ${turlerTurkce}
+                                </p> 
+                                
+                                <div class="bg-white p-3 rounded mb-4 border-start border-primary border-3 flex-grow-1 shadow-sm">
+                                    <p class="mb-0 text-dark" style="font-size: 0.85em; line-height: 1.6;">
+                                        <strong>Benim Yorumum:</strong> <br>
+                                        ${dizi.yorum}
                                     </p>
-                                    
-                                    <!-- Kendi Yorumumuz ve Favori Karakter -->
-                                    <div class="bg-white p-3 rounded mb-4 border-start border-primary border-3 flex-grow-1 shadow-sm">
-                                        <p class="mb-0 text-dark" style="font-size: 0.85em; line-height: 1.6;">
-                                            <strong>Benim Yorumum:</strong> <br> ${dizi.yorum}
-                                        </p>
-                                    </div>
-
-                                    <!-- Dış Bağlantı Butonu -->
-                                    <a href="${veri.url}" target="_blank" class="btn btn-outline-dark btn-sm mt-auto fw-bold">TVMaze Ayrıntıları</a>
                                 </div>
+
+                                <a href="${veri.url}" target="_blank" class="btn btn-outline-dark btn-sm mt-auto fw-bold">TVMaze Ayrıntıları</a>
                             </div>
                         </div>
+                    </div>
                     `;
+                    
+                    // Oluşturulan HTML kartını ekrandaki div kutusunun içine enjekte ediyoruz
                     kutu.innerHTML += kartHTML;
+                    
                 } catch (hata) {
+                    // API çökmesi veya internet kesintisi gibi durumlarda hatayı yakalıyoruz (Error Handling)
                     console.error("Veri çekilirken hata oluştu:", hata);
                 }
             }
         }
 
+        // Sayfa yüklendiğinde asenkron veri çekme fonksiyonunu tetikliyoruz
         dizileriGetir();
     </script>
+
     <footer class="text-center py-4 mt-5 border-top bg-light">
         <p class="text-muted mb-0 fw-bold">
             &copy; 2026 | Web Teknolojileri Projesi | Mustafa Emir Kayapınar - b251210090
         </p>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

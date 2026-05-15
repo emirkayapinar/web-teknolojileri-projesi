@@ -4,20 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İletişim | Mustafa Emir Kayapınar</title>
-    <!-- Tasarım için Bootstrap çekiyoruz, CSS dosyamı da bağladım -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
-    <!-- 7. GÜN: Vue.js Kütüphanesini Çekiyoruz -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body class="bg-light">
 
-    <!--Menü kısmı, aktif link İletişim sayfasında -->
-   <nav class="navbar navbar-expand-lg navbar-dark ozel-menu shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark ozel-menu shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#">Proje: b251210090</a>
+            <a class="navbar-brand fw-bold" href="#">Proje: b251210090</a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobilMenu">
                 <span class="navbar-toggler-icon"></span>
@@ -31,197 +29,162 @@
                     <li class="nav-item"><a class="nav-link" href="takimimiz.html">Takımımız</a></li>
                     <li class="nav-item"><a class="nav-link" href="ilgialanlarim.html">İlgi Alanlarım</a></li>
                     <li class="nav-item"><a class="nav-link active" href="iletisim.html">İletişim</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Giriş (Login)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Giriş</a></li>
                 </ul>
             </div>
-            
         </div>
     </nav>
-    <!--7. GÜN: Vue.js'in bu alanı tanıması için id eklendi -->
-    <main class="container mt-5" id="vueUygulamasi">
-        
-        <header class="text-center mb-5">
-            <h1 class="display-4 fw-bold text-dark">Benimle İletişime Geçin</h1>
-            <p class="lead text-muted">Proje, staj veya herhangi bir soru için aşağıdaki formu doldurabilirsiniz.</p>
-        </header>
 
-        <div class="row justify-content-center mb-5">
+    <main class="container mt-5 mb-5" id="app">
+        <div class="row justify-content-center">
             <div class="col-md-8">
-               <!-- Formun etrafındaki gölgeli beyaz kutu -->
-                <div class="card shadow border-0 rounded-4">
-                    <div class="card-body p-5">
+                <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 bg-white">
+                    <h2 class="fw-bold text-center mb-4">Benimle İletişime Geçin</h2>
+                    
+                    <form id="iletisimFormu" action="islem.php" method="POST">
                         
-                        <!-- FORM YAPISI SADECE TASARIM (6. GÜN) -->
-                        <!-- Şimdilik action boş (#), ileride PHP'ye bağlayacağız -->
-                        <form action="islem.php" method="POST" id="iletisimFormu" ref="iletisimFormu">
-                            
-                           <!-- Ad Soyad Kutusu -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">Adınız ve Soyadınız</label>
-                                <!-- 7. GÜN: v-model eklendi -->
-                                <input type="text" class="form-control bg-light" id="isim" name="isim" v-model="form.isim" placeholder="Örn: Mustafa Emir">
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Adınız ve Soyadınız</label>
+                            <input type="text" class="form-control" name="ad" id="isim" v-model="form.ad" placeholder="Örn: Mustafa Emir">
+                        </div>
 
-                            <!-- Mail Kutusu  -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">E-Posta Adresiniz</label>
-                                <!-- 7. GÜN: v-model eklendi ve JS ile kontrol edeceğimiz için type text yapıldı--> 
-                                <input type="text" class="form-control bg-light" id="email" name="email" v-model="form.email" placeholder="ornek@mail.com">
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">E-Posta Adresiniz</label>
+                            <input type="email" class="form-control" name="email" id="email" v-model="form.email" placeholder="ornek@mail.com">
+                        </div>
 
-                            <!-- Telefon numarası kutusu-->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">Telefon Numaranız</label>
-                                <!-- 7. GÜN: v-model eklendi -->
-                                <input type="text" class="form-control bg-light" id="telefon" name="telefon" v-model="form.telefon" placeholder="0555 123 45 67">
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Telefon Numaranız</label>
+                            <input type="tel" class="form-control" name="tel" id="telefon" v-model="form.tel" placeholder="0555 123 45 67">
+                        </div>
 
-                            <!--Radio Buttonlar  -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold d-block">Durumunuz</label>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="durum" id="ogrenci" value="Öğrenci" v-model="form.durum">
-                                    <label class="form-check-label" for="ogrenci">Öğrenciyim</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="durum" id="mezun" value="Mezun" v-model="form.durum">
-                                    <label class="form-check-label" for="mezun">Mezunum</label>
-                                </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold d-block">Durumunuz</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="durum" value="Öğrenci" v-model="form.durum">
+                                <label class="form-check-label">Öğrenciyim</label>
                             </div>
-
-                            <!-- Açılır Menü (Select) -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">Mesajınızın Konusu</label>
-                                <select class="form-select bg-light" id="konu" name="konu" v-model="form.konu">
-                                    <!-- Kullanıcı bunu seçemesin diye disabled yapıldı -->
-                                    <option value="" disabled selected>Lütfen bir konu seçin...</option>
-                                    <option value="Proje">Proje Değerlendirmesi</option>
-                                    <option value="Staj">İş / Staj Teklifi</option>
-                                    <option value="Soru">Soru / Öneri</option>
-                                </select>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="durum" value="Mezun" v-model="form.durum">
+                                <label class="form-check-label">Mezunum</label>
                             </div>
+                        </div>
 
-                            <!-- Kullanıcının mesajı yazacağı alan -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">Mesajınız</label>
-                                <textarea class="form-control bg-light" id="mesaj" name="mesaj" rows="4" v-model="form.mesaj" placeholder="Mesajınızı buraya yazınız..."></textarea>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Mesajınızın Konusu</label>
+                            <select class="form-select" name="konu" v-model="form.konu">
+                                <option value="">Lütfen bir konu seçin...</option>
+                                <option value="İstek">İstek</option>
+                                <option value="Şikayet">Şikayet</option>
+                                <option value="Öneri">Öneri</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Mesajınız</label>
+                            <textarea class="form-control" name="mesaj" id="mesaj" v-model="form.mesaj" rows="4" placeholder="Mesajınızı buraya yazınız..."></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="onay" v-model="form.onay">
+                                <label class="form-check-label small text-muted">Bilgilerimin doğruluğunu onaylıyorum.</label>
                             </div>
+                        </div>
 
-                              <!-- Onay kutusu (Checkbox) -->
-                            <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" id="onay" name="onay" v-model="form.onay">
-                                <label class="form-check-label" for="onay">
-                                    Bilgilerimin doğruluğunu onaylıyorum.
-                                </label>
-                            </div>
-
-                           <!-- 7. GÜN:  2 farklı denetim butonu eklendi -->
-                            <div class="d-grid gap-3 d-md-flex justify-content-md-center mt-4 pt-3 border-top">
-                                <button type="reset" class="btn btn-outline-secondary btn-lg px-4 fw-bold">Temizle</button>
-                                <button type="button" class="btn btn-danger btn-lg px-4 fw-bold shadow-sm" onclick="nativeKontrol()">Native JS Gönder</button>
-                                <button type="button" class="btn btn-success btn-lg px-4 fw-bold shadow-sm" @click="vueKontrol()">Vue.js Gönder</button>
-                            </div>
-
-                        </form>
-                        
-                    </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="reset" class="btn btn-outline-secondary px-4">Temizle</button>
+                            <button type="button" class="btn btn-danger px-4 fw-bold" onclick="nativeKontrol()">Native JS Gönder</button>
+                            <button type="button" class="btn btn-success px-4 fw-bold" @click="vueKontrol">Vue.js Gönder</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
     </main>
 
-    <!-- Sayfa yüklendiğinde takılmasın diye Bootstrap JS dosyası en altta -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- 7. GÜN: JAVASCRIPT HATA DENETİM KODLARI -->
-    <script>
-        // <!-- YÖNTEM 1: NATIVE (SAF) JAVASCRIPT  -->
-        function nativeKontrol() {
-            let isim = document.getElementById("isim").value;
-            let email = document.getElementById("email").value;
-            let telefon = document.getElementById("telefon").value;
-            let mesaj = document.getElementById("mesaj").value;
-            let onay = document.getElementById("onay").checked;
-
-            if (isim === "" || email === "" || telefon === "" || mesaj === "") {
-                alert("(Native JS) HATA: Lütfen tüm boş alanları doldurunuz!");
-                return;
-            }
-
-            let rakamSarti = /^[0-9]+$/;
-            if (!telefon.match(rakamSarti)) {
-                alert("(Native JS) HATA: Telefon numarası sadece rakamlardan oluşmalıdır!");
-                return;
-            }
-
-            let emailSarti = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!email.match(emailSarti)) {
-                alert("(Native JS) HATA: Lütfen geçerli bir e-posta adresi giriniz!");
-                return;
-            }
-
-            if (!onay) {
-                alert("(Native JS) HATA: Bilgilerin doğruluğunu onaylamanız gerekiyor!");
-                return;
-            }
-
-            alert("(Native JS) BAŞARILI! Form PHP sayfasına yollanıyor...");
-            document.getElementById("iletisimFormu").submit();
-        }
-     
-            // -- YÖNTEM 2: VUE.JS FRAMEWORK --
-        const { createApp } = Vue;
-
-        createApp({
-            data() {
-                return {
-                    form: {
-                        isim: '',
-                        email: '',
-                        telefon: '',
-                        durum: '',
-                        konu: '',
-                        mesaj: '',
-                        onay: false
-                    }
-                }
-            },
-            methods: {
-                vueKontrol() {
-                    if (this.form.isim === '' || this.form.email === '' || this.form.telefon === '' || this.form.mesaj === '') {
-                        alert("(Vue.js) HATA: Lütfen tüm boş alanları doldurunuz!");
-                        return;
-                    }
-
-                    let rakamSarti = /^[0-9]+$/;
-                    if (!rakamSarti.test(this.form.telefon)) {
-                        alert("(Vue.js) HATA: Telefon alanına sadece rakam girmelisiniz!");
-                        return;
-                    }
-
-                    let emailSarti = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailSarti.test(this.form.email)) {
-                        alert("(Vue.js) HATA: E-posta formatınız hatalı!");
-                        return;
-                    }
-
-                    if (!this.form.onay) {
-                        alert("(Vue.js) HATA: Onay kutusunu işaretlemediniz!");
-                        return;
-                    }
-
-                    alert("(Vue.js) BAŞARILI! Vue ile doğrulandı, form PHP'ye yollanıyor...");
-                    document.getElementById("iletisimFormu").submit();
-                }
-            }
-        }).mount('#vueUygulamasi');
-    </script>
     <footer class="text-center py-4 mt-5 border-top bg-light">
         <p class="text-muted mb-0 fw-bold">
             &copy; 2026 | Web Teknolojileri Projesi | Mustafa Emir Kayapınar - b251210090
         </p>
     </footer>
+
+    <script>
+        // --- YÖNTEM 1: NATIVE (SAF) JAVASCRIPT ---
+        function nativeKontrol() {
+            // Verileri çek ve boşlukları temizle (trim)
+            let isim = document.getElementById("isim").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let telefon = document.getElementById("telefon").value.trim();
+            let mesaj = document.getElementById("mesaj").value.trim();
+            let onay = document.getElementById("onay").checked;
+
+            // Regex Şartları: Geçersiz veri girişini engellemek için
+            let isimSarti = /^[a-zA-ZğüşiöçĞÜŞİÖÇ\s]{5,50}$/; // Sadece harf, min 5 karakter
+            let telSarti = /^5[0-9]{9}$/; // 5 ile başlayan, 10 haneli numara
+            let emailSarti = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Standart mail formatı
+
+            // Denetim döngüsü
+            if (isim === "" || email === "" || telefon === "" || mesaj === "") {
+                alert("Native JS: Lütfen tüm alanları doldurun!");
+                return;
+            }
+            if (!isimSarti.test(isim)) {
+                alert("Native JS: Lütfen geçerli bir isim girin (Sadece harf, min 5 karakter).");
+                return;
+            }
+            if (!telSarti.test(telefon)) {
+                alert("Native JS: Telefon 5 ile başlamalı ve 10 hane olmalı.");
+                return;
+            }
+            if (!emailSarti.test(email)) {
+                alert("Native JS: E-posta formatı hatalı.");
+                return;
+            }
+            if (!onay) {
+                alert("Native JS: Lütfen onay kutusunu işaretleyin.");
+                return;
+            }
+
+            // Tüm kontroller geçerse formu sunucuya (PHP) gönder
+            document.getElementById("iletisimFormu").submit();
+        }
+
+        // --- YÖNTEM 2: VUE.JS FRAMEWORK ---
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    // Form verilerinin Vue tarafındaki karşılıkları
+                    form: { ad: '', email: '', tel: '', durum: '', konu: '', mesaj: '', onay: false }
+                }
+            },
+            methods: {
+                vueKontrol() {
+                    // Vue tarafındaki Regex denetimleri
+                    const isimSarti = /^[a-zA-ZğüşiöçĞÜŞİÖÇ\s]{5,50}$/;
+                    const telSarti = /^5[0-9]{9}$/;
+
+                    if (!isimSarti.test(this.form.ad)) {
+                        alert("Vue.js: Geçersiz ad soyad formatı!");
+                        return;
+                    }
+                    if (!telSarti.test(this.form.tel)) {
+                        alert("Vue.js: Telefon numarası formatı hatalı!");
+                        return;
+                    }
+                    if (!this.form.onay) {
+                        alert("Vue.js: Onay kutusu işaretlenmelidir!");
+                        return;
+                    }
+
+                    // Her şey tamamsa formu PHP'ye teslim et
+                    document.getElementById("iletisimFormu").submit();
+                }
+            }
+        }).mount('#app');
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -14,9 +14,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
+        /* Projenin genelinde kullanılan vurgu rengi (Sarı/Papaya tonu) */
         .f1-vurgu { color: #ffc107; } 
-        .modern-kart:hover { transform: translateY(-5px); transition: 0.3s; }
-        .f1-resim { box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 3px solid #fff; }
+        
+        /* Kartların üzerine gelindiğinde yukarı kayma efekti (Hover) */
+        .modern-kart:hover { 
+            transform: translateY(-5px); 
+            transition: 0.3s; 
+        }
+        
+        /* Verstappen fotoğrafı için özel gölge ve çerçeve tasarımı */
+        .f1-resim { 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            border: 3px solid #fff; 
+        }
     </style>
 </head>
 <body class="bg-light" style="font-family: 'Poppins', sans-serif;">
@@ -40,11 +51,11 @@
                     <li class="nav-item"><a class="nav-link" href="login.html">Giriş (Login)</a></li>
                 </ul>
             </div>
-            
         </div>
     </nav>
 
    <main class="container mt-5 mb-5">
+        
         <section class="text-center text-lg-start">
             <h1 class="display-5 fw-bold text-dark">Merhaba, Ben Mustafa Emir Kayapınar</h1>
             <p class="lead text-muted fs-4">Sakarya Üniversitesi Bilgisayar Mühendisliği 1. sınıf (A Grubu) öğrencisiyim.</p>
@@ -52,13 +63,14 @@
         
         <section class="mt-5">
             <h3 class="fw-bold mb-4 text-dark border-start border-4 border-warning ps-3">Neler Yapıyorum?</h3>
+            
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 
                 <div class="col">
                     <div class="card h-100 border-0 shadow-sm rounded-4 modern-kart bg-white p-2">
                         <div class="card-body">
                             <h5 class="card-title fw-bold text-dark"><span class="fs-4 me-2">⚽</span> Futbol Tutkusu</h5>
-                            <p class="card-text text-muted" style="font-size: 0.95em;">Koyu bir <strong class="text-dark">Beşiktaş taraftarıyım</strong>, stadyumda o atmosferi yaşamayı seviyorum. Avrupa'da favorim Barça!</p>
+                            <p class="card-text text-muted" style="font-size: 0.95em;">Koyu bir <strong>Beşiktaş taraftarıyım</strong>, stadyumda o atmosferi yaşamayı seviyorum. Avrupa'da favorim Barça!</p>
                         </div>
                     </div>
                 </div>
@@ -96,12 +108,12 @@
         <section class="mt-5 p-5 bg-white shadow-sm rounded-4 border-0">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0 text-center">
-                    <img src="img/max.jpg" alt="Max Verstappen" class="img-fluid rounded-4 f1-resim" style="max-width: 600  px; height: auto;">
+                    <img src="img/max.jpg" alt="Max Verstappen" class="img-fluid rounded-4 f1-resim" style="max-width: 600px; height: auto;">
                 </div>
                 
                 <div class="col-lg-6">
-                    <h4 class="fw-bold text-dark mb-3"><i class="fa-solid fa-flag-checkered me-2 f1-vurgu"></i>Formula 1 Tutkusu</h4>
-                    <p class="text-muted mb-4 fs-6">Hafta sonları F1 yarışlarını kaçırmam. Max Verstappen'in yarış temposunu, hayatını ve <span class="fw-bold text-dark">Red Bull</span>'un stratejilerini yakından takip ediyorum.</p>
+                    <h4 class="fw-bold text-dark mb-3">Formula 1 Tutkusu</h4>
+                    <p class="text-muted mb-4 fs-6">Hafta sonları F1 yarışlarını kaçırmam. Max Verstappen'in yarış temposunu, hayatını ve <strong>Red Bull</strong>'un stratejilerini yakından takip ediyorum.</p>
                     
                     <div class="ratio ratio-16x9 shadow rounded-4 overflow-hidden border-0 bg-dark">
                         <iframe src="https://www.youtube.com/embed/KkkRXSZX0lg?si=rg6CPj0jzcl06H__" title="F1 Video" allowfullscreen></iframe>
@@ -110,11 +122,13 @@
             </div>
         </section>
     </main>
+    
     <footer class="text-center py-4 mt-5 border-top bg-light">
         <p class="text-muted mb-0 fw-bold">
             &copy; 2026 | Web Teknolojileri Projesi | Mustafa Emir Kayapınar - b251210090
         </p>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
